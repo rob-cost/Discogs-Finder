@@ -1,4 +1,4 @@
-# Discogs Finder
+# Discogs Finder - work in progress
 
 **Discogs Finder** is a command-line tool designed to enhance your searches on Discogs, specifically for electronic music.  
 It adds an **extra layer of filters** to your Discogs queries, allowing you to narrow down releases based on multiple criteria and get the URLs of matching releases.
