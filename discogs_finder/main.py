@@ -7,7 +7,13 @@ import os
 from dotenv import load_dotenv
 from .data.countries import COUNTRIES
 from .data.styles import ELECTRONIC_STYLES
-from .input.prompts import STYLE_PROMPT, COUNTRY_PROMPT, YEAR_PROMPT, WANTS_PROMPT
+from .input.prompts import (
+    STYLE_PROMPT,
+    COUNTRY_PROMPT,
+    YEAR_PROMPT,
+    WANTS_PROMPT,
+    FILE_NAME_PROMPT,
+)
 from .input.validators import get_string, get_year, get_int
 from .utils.helpers import filter_list
 
@@ -25,6 +31,7 @@ def main():
     country = get_string(COUNTRY_PROMPT, allowed={c.lower() for c in COUNTRIES})
     year = get_year(YEAR_PROMPT)
     want = get_int(WANTS_PROMPT)
+    file_name = get_string(FILE_NAME_PROMPT)
 
     # Get releases based on user inputs
     releases = d.search(
@@ -39,8 +46,17 @@ def main():
     # Extract release IDs from the fetched releases
     releases_ids = [release.id for release in releases.page(1)]
 
-    # Filter list based on parameters
-    filter_list(d, releases_ids, want, style)
+    # Create a desktop file path
+    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+    file_path = os.path.join(desktop_path, file_name + ".html")
+    with open(file_path, "w") as f:
+        f.write(
+            f"Search for releases with style: {style}, country: {country}, year: {year}, want less than: {want}<br><br>\n"
+        )
+        f.close()
+
+    # Filter list based on parameters annd write to file
+    filter_list(d, releases_ids, want, style, file_path)
 
 
 if __name__ == "__main__":

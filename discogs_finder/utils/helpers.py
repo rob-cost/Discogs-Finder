@@ -1,4 +1,4 @@
-def filter_list(d, releases_ids, want_treshold, style):
+def filter_list(d, releases_ids, want_treshold, style, file_path):
 
     style = style if isinstance(style, list) else [style]
     style = [s.lower() for s in style]
@@ -16,12 +16,12 @@ def filter_list(d, releases_ids, want_treshold, style):
                 release_style
             ):
                 print(release.url)
-                write_on_file(release.url)
+                write_on_file(release.url, file_path)
 
         except Exception as e:
             print(f"Error fetching: {e}")
 
 
-def write_on_file(url):
-    with open("filtered_releases.txt", "a") as f:
-        f.write(url + "\n")
+def write_on_file(url, file_path):
+    with open(file_path, "a") as f:
+        f.write(f'<a href="{url}" target="_blank">{url}</a><br>\n')
