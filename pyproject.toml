@@ -8,3 +8,6 @@ dependencies = [
     "python-dotenv>=1.2.1",
     "python3-discogs-client>=2.8",
 ]
+
+[project.scripts]
+discogs-finder = "discogs_finder.main:main"
