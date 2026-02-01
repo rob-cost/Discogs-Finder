@@ -26,3 +26,23 @@ It adds an **extra layer of filters** to your Discogs queries, allowing you to n
 git clone <repository-url>
 cd discogs-finder
 ```
+
+2. Create and activate venv
+
+```bash
+uv venv
+source .venv/bin/activate
+uv pip install -e .
+```
+
+3. Create a .env file with your Discogs API Token
+
+```bash
+DISCOGS_API_TOKEN=your_token_here
+```
+
+4. Run
+
+```bash
+discogs-finder
+```
