@@ -16,6 +16,12 @@ def filter_list(d, releases_ids, want_treshold, style):
                 release_style
             ):
                 print(release.url)
+                write_on_file(release.url)
 
         except Exception as e:
             print(f"Error fetching: {e}")
+
+
+def write_on_file(url):
+    with open("filtered_releases.txt", "a") as f:
+        f.write(url + "\n")
