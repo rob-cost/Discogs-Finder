@@ -44,7 +44,7 @@ def main():
     )
 
     # Extract release IDs from the fetched releases
-    releases_ids = [release.id for release in releases.page(1)]
+    releases_ids = [release.id for release in releases]
 
     # Create a desktop file path
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")

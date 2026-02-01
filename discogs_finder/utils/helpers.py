@@ -20,6 +20,7 @@ def filter_list(d, releases_ids, want_treshold, style, file_path):
 
         except Exception as e:
             print(f"Error fetching: {e}")
+    print("Done!")
 
 
 def write_on_file(url, file_path):
