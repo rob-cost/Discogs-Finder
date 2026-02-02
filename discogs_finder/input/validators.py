@@ -6,6 +6,9 @@ def get_string(prompt, allowed=None):
             print("Input cannot be empty")
             continue
 
+        if raw.lower() == "none":
+            return None
+
         values = [v.strip().lower() for v in raw.split(",")]
 
         if allowed:
@@ -44,3 +47,15 @@ def get_year(prompt):
                 pass
 
         print("Insert a right value")
+
+
+def get_bool(prompt):
+    while True:
+        value = input(prompt).strip().lower()
+
+        if value == "yes":
+            return True
+        if value == "no":
+            return False
+
+        print("write either yes or no")
