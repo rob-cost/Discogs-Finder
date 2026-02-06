@@ -1,5 +1,5 @@
 def filter_list(
-    d, releases_ids, want_treshold, have_treshold, user_style, more_style, file_path
+    d, releases_ids, want_treshold, have_treshold, user_style, include_styles, file_path
 ):
 
     # Normalize user style
@@ -26,7 +26,7 @@ def filter_list(
                 continue
 
             # Set style match
-            if not more_style:
+            if not include_styles:
                 style_match = set(user_style) == (release_style)
 
             else:

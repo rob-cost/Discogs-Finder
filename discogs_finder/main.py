@@ -9,7 +9,7 @@ from .data.countries import COUNTRIES
 from .data.styles import ELECTRONIC_STYLES
 from .input.prompts import (
     STYLE_PROMPT,
-    USE_MORE_STYLE,
+    INCLUDE_MORE_STYLES,
     COUNTRY_PROMPT,
     YEAR_PROMPT,
     WANTS_PROMPT,
@@ -30,7 +30,7 @@ def main():
 
     # Get user inputs
     style = get_string(STYLE_PROMPT, allowed={s.lower() for s in ELECTRONIC_STYLES})
-    more_style = get_bool(USE_MORE_STYLE)
+    include_style = get_bool(INCLUDE_MORE_STYLES)
     country = get_string(COUNTRY_PROMPT, allowed={c.lower() for c in COUNTRIES})
     year = get_year(YEAR_PROMPT)
     have = get_int(HAVE_PROMPT)
@@ -53,7 +53,7 @@ def main():
     releases = d.search(**search_params)  # ** turn each key/value into named argument
 
     # Extract release IDs from the fetched releases
-    releases_ids = [release.id for release in releases.page(1)]
+    releases_ids = [release.id for release in releases]
 
     # Create a desktop file path
     desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
@@ -65,7 +65,7 @@ def main():
         f.close()
 
     # Filter list based on parameters annd write to file
-    filter_list(d, releases_ids, want, have, style, more_style, file_path)
+    filter_list(d, releases_ids, want, have, style, include_style, file_path)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ STYLE_PROMPT = (
     "Select electronic style(s) (comma-separated, e.g. techno, house, electro): "
 )
 
-USE_MORE_STYLE = "Do you want to add more styles? (yes/no): "
+INCLUDE_MORE_STYLES = "Do you want to include more styles? (yes/no): "
 
 COUNTRY_PROMPT = "Select release country (e.g. US, Italy, UK, Spain, Europe) or none: "
 
