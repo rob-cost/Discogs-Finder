@@ -26,7 +26,7 @@ def filter_list(
                 continue
 
             # Set style match
-            if not include_styles:
+            if include_styles == "no":
                 style_match = set(user_style) == (release_style)
 
             else:

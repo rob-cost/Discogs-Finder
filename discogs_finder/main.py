@@ -50,19 +50,34 @@ def main():
         search_params["country"] = country
 
     # Fetch releases
-    releases = d.search(**search_params)  # ** turn each key/value into named argument
+    try:
+        releases = d.search(
+            **search_params
+        )  # ** turn each key/value into named argument
+    except Exception as e:
+        print(f"Error fetching releases: {e}")
+        return
 
     # Extract release IDs from the fetched releases
-    releases_ids = [release.id for release in releases]
+    try:
+        releases_ids = [release.id for release in releases]
+        print(f"Total releases found: {len(releases_ids)}")
+    except Exception as e:
+        print(f"Error extracting release IDs: {e}")
+        return
 
     # Create a desktop file path
-    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-    file_path = os.path.join(desktop_path, file_name + ".html")
-    with open(file_path, "w") as f:
-        f.write(
-            f"Search for releases with style: {style}, country: {country}, year: {year}, want less than: {want}, have less than: {have}<br><br>\n"
-        )
-        f.close()
+    try:
+        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+        file_path = os.path.join(desktop_path, file_name + ".html")
+        with open(file_path, "w") as f:
+            f.write(
+                f"Search for releases with style: {style}, country: {country}, year: {year}, want less than: {want}, have less than: {have}<br><br>\n"
+            )
+            f.close()
+    except Exception as e:
+        print(f"Error creating file path: {e}")
+        return
 
     # Filter list based on parameters annd write to file
     filter_list(d, releases_ids, want, have, style, include_style, file_path)
