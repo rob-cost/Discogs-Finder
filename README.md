@@ -12,13 +12,21 @@ This tool adds an extra layer of filtering on top of the Discogs API, allowing u
 
 - Filter releases by:
   - **Style** (single or multiple)
+
   - **Country** of release
+
   - **Year or range of years**
+
   - **Community want count** (how many users want it)
+
   - **Community have count** (how many users have it)
+
 - Only returns releases that match the exact styles you choose
+
 - Works entirely in the terminal — no web interface required
+
 - Uses your Discogs API token for authenticated requests
+
 - Automatically saves results to an HTML file with clickable links
 
 ---

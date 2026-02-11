@@ -1,3 +1,6 @@
+from utils.write_on_file import write_on_file
+
+
 def filter_list(
     d, releases_ids, want_treshold, have_treshold, user_style, include_styles, file_path
 ):
@@ -26,8 +29,8 @@ def filter_list(
                 continue
 
             # Set style match
-            if include_styles == "no":
-                style_match = set(user_style) == (release_style)
+            if not include_styles:
+                style_match = set(user_style) == set(release_style)
 
             else:
                 style_match = set(user_style).issubset(set(release_style))
@@ -41,8 +44,3 @@ def filter_list(
             print(f"Error fetching: {e}")
 
     print("Done!")
-
-
-def write_on_file(url, file_path):
-    with open(file_path, "a") as f:
-        f.write(f'<a href="{url}" target="_blank">{url}</a><br>\n')

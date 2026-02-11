@@ -1,6 +1,3 @@
-# Notes
-# If release has no video prints empty array
-
 import discogs_client
 import os
 
@@ -17,7 +14,7 @@ from .input.prompts import (
     FILE_NAME_PROMPT,
 )
 from .input.validators import get_string, get_year, get_int, get_bool
-from .utils.helpers import filter_list
+from .utils.filter import filter_list
 
 
 def main():
@@ -61,7 +58,7 @@ def main():
     # Extract release IDs from the fetched releases
     try:
         releases_ids = [release.id for release in releases]
-        print(f"Total releases found: {len(releases_ids)}")
+        print(f"Total releases found without filtering: {len(releases_ids)}")
     except Exception as e:
         print(f"Error extracting release IDs: {e}")
         return
@@ -79,8 +76,13 @@ def main():
         print(f"Error creating file path: {e}")
         return
 
-    # Filter list based on parameters annd write to file
-    filter_list(d, releases_ids, want, have, style, include_style, file_path)
+    # Filter list based on parameters and write to file
+    try:
+        print("Filtering releases...")
+        filter_list(d, releases_ids, want, have, style, include_style, file_path)
+    except Exception as e:
+        print(f"Error filtering list: {e}")
+        return
 
 
 if __name__ == "__main__":
