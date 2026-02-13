@@ -1,9 +1,11 @@
-from utils.write_on_file import write_on_file
+from .write_on_file import write_on_file
 
 
 def filter_list(
     d, releases_ids, want_treshold, have_treshold, user_style, include_styles, file_path
 ):
+
+    count = 0
 
     # Normalize user style
     user_style = user_style if isinstance(user_style, list) else [user_style]
@@ -37,6 +39,7 @@ def filter_list(
 
             if style_match:
                 print(release.url)
+                count += 1
                 # call function
                 write_on_file(release.url, file_path)
 
@@ -44,3 +47,4 @@ def filter_list(
             print(f"Error fetching: {e}")
 
     print("Done!")
+    print(f"Total releases found: {count}")
